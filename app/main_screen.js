@@ -7,18 +7,29 @@ import {
   Text,
   View,
   Image,
+  ScrollView,
 } from 'react-native';
 import { fetch } from 'fetch';
 import { IMDB_API } from './data';
+import MovieCell from './components/movie_cell'
 
 class MainScreen extends Component {
+  state = {
+    movies: [],
+  }
+
   render() {
+    const list = this.state.movies.map(
+      movie => <MovieCell key={movie.id} movie={movie}></MovieCell>
+    );
     return (
-      <View style={styles.container}>
-        <View style={{marginTop: 20}}>
-          <Text style={styles.helloText}>Hello, fox!</Text>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <View style={{marginTop: 20}}>
+            {list}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 
@@ -26,7 +37,7 @@ class MainScreen extends Component {
     fetch(IMDB_API)
       .then(response => response.json())
       .then((data) => {
-        console.log('Response from API:', data);
+        this.setState({movies: data.results})
       });
   }
 }
@@ -34,11 +45,10 @@ class MainScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
   },
-  helloText: {
-    fontSize: 14,
-  },
+  scrollView: {
+    backgroundColor: 'rgba(0,0,0,0.8)',
+  }
 });
 
 export default MainScreen;
