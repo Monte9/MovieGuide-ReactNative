@@ -8,6 +8,7 @@ import {
   View,
   Image,
   ScrollView,
+  Alert,
 } from 'react-native';
 import { fetch } from 'fetch';
 import { IMDB_API } from './data';
@@ -18,10 +19,22 @@ class MainScreen extends Component {
     movies: [],
   }
 
+  onLike(title) {
+    Alert.alert(
+      `Liked: ${title}`,
+      'Thanks for your feedback',
+      [
+        {text: 'Rate It!', onPress: () => console.log('User wants to rate it!'), style: 'cancel'},
+        {text: 'Dismiss', onPress: () => console.log('Dismiss')},
+      ]
+    )
+  }
+
   render() {
     const list = this.state.movies.map(
-      movie => <MovieCell key={movie.id} movie={movie}></MovieCell>
+      movie => <MovieCell key={movie.id} movie={movie} onLike={() =>    this.onLike(movie.original_title)}></MovieCell>
     );
+
     return (
       <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
