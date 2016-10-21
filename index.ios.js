@@ -2,6 +2,6 @@
 import React, { Component } from 'react'
 import { AppRegistry } from 'react-native';
 
-import App from './app/root/app'
+import Index from './app/root/index'
 
-AppRegistry.registerComponent('MovieGuide', () => App);
+AppRegistry.registerComponent('MovieGuide', () => Index);

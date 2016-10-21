@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import {
   AppRegistry,
   StyleSheet,
@@ -18,33 +19,34 @@ import TabNavigator from 'react-native-tab-navigator';
 
 import { ENDPOINTS, IMDB_API, API_KEY } from '../root/constants';
 
+import { saveMovies, setSelectedTab } from '../actions/movies'
+
 import TabView1 from '../components/tab_view_1'
 import TabView2 from '../components/tab_view_2'
 
 class App extends Component {
-  state = {
-    selectedTab: 'view1',
-  }
-
-  componentDidMount() {
+  setup() {
     ENDPOINTS.map(
       endpoint => {
         fetch(IMDB_API + endpoint + API_KEY)
           .then(response => response.json())
           .then((data) => {
-            this.setState({[endpoint]: data.results})
+            this.props.dispatch( saveMovies(endpoint, data.results) )
           });
       }
     )
+    this.props.dispatch( setSelectedTab( "view1" ) )
   }
 
   onPressNavigationButtons() {
     console.log("Navigation bar button pressed")
-    console.log(this.state)
   }
 
   render() {
-    console.log(this.state)
+    this.setup()
+    console.log("THIS IS FINAL")
+    console.log(this.props)
+
     return (
       <View style={styles.containerView}>
         <View>
@@ -68,78 +70,68 @@ class App extends Component {
         </View>
         <TabNavigator tabBarStyle={styles.tabBar}>
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'view1'}
+            selected={this.props.selectedTab === 'view1'}
             title="View 1"
             renderIcon={() => <Image source={require('../img/star_empty.png')} />}
             renderSelectedIcon={() => <Image source={require('../img/liking.png')} />}
             titleStyle={styles.tabTitle}
             tabStyle={styles.tab}
             onPress={() => {
-                this.setState({
-                    selectedTab: 'view1',
-                });
+                this.props.dispatch( setSelectedTab( "view1" ) )
             }}
             >
             <TabView1 />
           </TabNavigator.Item>
 
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'view2'}
+            selected={this.props.selectedTab === 'view2'}
             renderIcon={() => <Image source={require('../img/star_empty.png')} />}
             renderSelectedIcon={() => <Image source={require('../img/liking.png')} />}
             title="View 2"
             titleStyle={styles.tabTitle}
             tabStyle={styles.tab}
             onPress={() => {
-                this.setState({
-                    selectedTab: 'view2',
-                });
+                this.props.dispatch( setSelectedTab( "view2" ) )
             }}
             >
             <TabView2 />
           </TabNavigator.Item>
 
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'view3'}
+            selected={this.props.selectedTab === 'view3'}
             renderIcon={() => <Image source={require('../img/star_empty.png')} />}
             renderSelectedIcon={() => <Image source={require('../img/liking.png')} />}
             tabStyle={styles.addButton}
             onPress={() => {
-                this.setState({
-                    selectedTab: 'view3',
-                });
+                this.props.dispatch( setSelectedTab( "view3" ) )
             }}
             >
             //insert shit here
           </TabNavigator.Item>
 
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'view4'}
+            selected={this.props.selectedTab === 'view4'}
             renderIcon={() => <Image source={require('../img/star_empty.png')} />}
             renderSelectedIcon={() => <Image source={require('../img/liking.png')} />}
             title="View 4"
             titleStyle={styles.tabTitle}
             tabStyle={styles.tab}
             onPress={() => {
-                this.setState({
-                    selectedTab: 'view4',
-                });
+                this.props.dispatch( setSelectedTab( "view4" ) )
             }}
             >
             // shit here
           </TabNavigator.Item>
 
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'view5'}
+            selected={this.props.selectedTab === 'view5'}
             renderIcon={() => <Image source={require('../img/star_empty.png')} />}
             renderSelectedIcon={() => <Image source={require('../img/liking.png')} />}
             title="View 5"
             titleStyle={styles.tabTitle}
             tabStyle={styles.tab}
             onPress={() => {
-                this.setState({
-                    selectedTab: 'view5',
-                });
+                this.props.dispatch( setSelectedTab( "view5" ) )
             }}
             >
             // shit here
@@ -203,4 +195,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default connect( )( App )

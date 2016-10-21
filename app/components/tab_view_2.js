@@ -1,62 +1,29 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
   ScrollView,
-  Alert,
-  StatusBar,
-  TouchableOpacity,
+  View,
+  Text,
 } from 'react-native';
 
-import { fetch } from 'fetch';
-import TabNavigator from 'react-native-tab-navigator';
-
-import { IMDB_API } from '../root/constants';
-
-import MovieCell from './movie_cell'
+import MovieList from './movie_list'
 
 class TabView2 extends Component {
-  state = {
-    movies: [],
-    selectedTab: 'view2',
-  }
-
-  onLike(title) {
-    Alert.alert(
-      `Liked: ${title}`,
-      'Thanks for your feedback',
-      [
-        {text: 'Rate It!', onPress: () => console.log('User wants to rate it!'), style: 'cancel'},
-        {text: 'Dismiss', onPress: () => console.log('Dismiss')},
-      ]
-    )
-  }
-
   movieList() {
-    return (
-      this.state.movies.map(
-      movie =>
-      <MovieCell
-        key={movie.id}
-        movie={movie}
-        onLike={() => this.onLike(movie.original_title)} />
-      )
-    )
+    return this.props.now_playing ? <MovieList movies={this.state.now_playing} /> : <View />
   }
 
   render() {
+    console.log("AYAYAYAYYAY 222222222")
     return (
       <ScrollView
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false} >
+        <Text> Hello world </Text>
+        {this.movieList()}
       </ScrollView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-});
-
-export default TabView2;
+export default connect( )( TabView2 )
