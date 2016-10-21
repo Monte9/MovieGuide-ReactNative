@@ -1,4 +1,4 @@
-import MainScreen from './app/main_screen';
+import App from './app/root/app'
 import { AppRegistry } from 'react-native';
 
-AppRegistry.registerComponent('MovieGuide', () => MainScreen);
+AppRegistry.registerComponent('MovieGuide', () => App);

@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-import { BASE_IMG_URL } from '../data';
+import { BASE_IMG_URL } from '../root/constants';
 import RatingText from './rating_text';
 
 class MovieCell extends Component {
@@ -57,7 +57,9 @@ const styles = StyleSheet.create({
   posterImage: {
     height: 105,
     width: 70,
-    paddingLeft: 10,
+    left: 5,
+    alignItems: 'center',
+    alignSelf: 'center',
   },
   moreInfo: {
     flex: 1,
