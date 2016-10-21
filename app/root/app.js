@@ -21,8 +21,11 @@ import { ENDPOINTS, IMDB_API, API_KEY } from '../root/constants';
 
 import { saveMovies, setSelectedTab } from '../actions/movies'
 
-import TabView1 from '../components/tab_view_1'
-import TabView2 from '../components/tab_view_2'
+import TabView1 from '../components/tabs/tab_view_1'
+import TabView2 from '../components/tabs/tab_view_2'
+import TabView3 from '../components/tabs/tab_view_3'
+import TabView4 from '../components/tabs/tab_view_4'
+import TabView5 from '../components/tabs/tab_view_5'
 
 class App extends Component {
   setup() {
@@ -44,7 +47,7 @@ class App extends Component {
 
   render() {
     this.setup()
-    console.log("THIS IS FINAL")
+
     console.log(this.props)
 
     return (
@@ -77,9 +80,8 @@ class App extends Component {
             titleStyle={styles.tabTitle}
             tabStyle={styles.tab}
             onPress={() => {
-                this.props.dispatch( setSelectedTab( "view1" ) )
-            }}
-            >
+              this.props.dispatch( setSelectedTab( "view1" ) )
+            }}>
             <TabView1 />
           </TabNavigator.Item>
 
@@ -91,9 +93,8 @@ class App extends Component {
             titleStyle={styles.tabTitle}
             tabStyle={styles.tab}
             onPress={() => {
-                this.props.dispatch( setSelectedTab( "view2" ) )
-            }}
-            >
+              this.props.dispatch( setSelectedTab( "view2" ) )
+            }}>
             <TabView2 />
           </TabNavigator.Item>
 
@@ -103,10 +104,9 @@ class App extends Component {
             renderSelectedIcon={() => <Image source={require('../img/liking.png')} />}
             tabStyle={styles.addButton}
             onPress={() => {
-                this.props.dispatch( setSelectedTab( "view3" ) )
-            }}
-            >
-            //insert shit here
+              this.props.dispatch( setSelectedTab( "view3" ) )
+            }}>
+            <TabView3 />
           </TabNavigator.Item>
 
           <TabNavigator.Item
@@ -117,10 +117,9 @@ class App extends Component {
             titleStyle={styles.tabTitle}
             tabStyle={styles.tab}
             onPress={() => {
-                this.props.dispatch( setSelectedTab( "view4" ) )
-            }}
-            >
-            // shit here
+              this.props.dispatch( setSelectedTab( "view4" ) )
+            }}>
+            <TabView4 />
           </TabNavigator.Item>
 
           <TabNavigator.Item
@@ -131,10 +130,9 @@ class App extends Component {
             titleStyle={styles.tabTitle}
             tabStyle={styles.tab}
             onPress={() => {
-                this.props.dispatch( setSelectedTab( "view5" ) )
-            }}
-            >
-            // shit here
+              this.props.dispatch( setSelectedTab( "view5" ) )
+            }}>
+            <TabView5 />
           </TabNavigator.Item>
         </TabNavigator>
       </View>
@@ -195,4 +193,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect( )( App )
+export default connect()( App )

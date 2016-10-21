@@ -8,8 +8,8 @@ import {
   ScrollView,
 } from 'react-native';
 
-import { BASE_IMG_URL } from '../root/constants';
-import RatingText from './rating_text';
+import { BASE_IMG_URL } from '../../root/constants';
+import RatingText from '../rating_text';
 
 class MovieCell extends Component {
   render() {

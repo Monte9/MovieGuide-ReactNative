@@ -6,24 +6,22 @@ import {
   Text,
 } from 'react-native';
 
-import MovieList from './movie_list'
+import MovieList from '../movie/movie_list'
 
-class TabView1 extends Component {
+class TabView3 extends Component {
   movieList() {
-    return this.props.now_playing ? <MovieList movies={this.state.now_playing} /> : <View />
+    return this.props.popular ? <MovieList movies={this.state.popular} /> : <View />
   }
 
   render() {
-    console.log("AYAYAYAYYAY")
     return (
       <ScrollView
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false} >
-        <Text> Hello world </Text>
         {this.movieList()}
       </ScrollView>
     );
   }
 }
 
-export default connect( )( TabView1 )
+export default connect( )( TabView3 )

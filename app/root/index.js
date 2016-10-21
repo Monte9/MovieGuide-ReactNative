@@ -8,7 +8,7 @@ import reducer from '../reducers/index'
 
 import { INITIAL_STATE } from './initial_state'
 
-const store = createStore(reducer, 42 )
+const store = createStore(reducer, {})
 
 export default class Index extends Component {
   render() {
